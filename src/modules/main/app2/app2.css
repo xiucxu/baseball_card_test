@@ -547,18 +547,6 @@
     color: white !important;
 }
 
-/* Ensure specific icons are white on colored backgrounds */
-/* Removed specific rules for Highlights Panel and Recommendations as they were deleted */
-
-/* Force specific SVG elements to be white for problematic icons */
-/* Removed specific rules for Highlights Panel and Recommendations as they were deleted */
-
-/* Use CSS filter to force white color for specific icons */
-/* Removed specific rules for Highlights Panel and Recommendations as they were deleted */
-
-/* Alternative approach - use CSS mask for white icons */
-/* Removed specific rules for Highlights Panel and Recommendations as they were deleted */
-
 /* AppExchange Footer */
 .appexchange-footer {
     background-color: #0176d3;
@@ -732,66 +720,6 @@ lightning-accordion {
     margin-bottom: 12px;
 }
 
-/* Customize Sections Accordion */
-
-.section-items {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.section-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background-color: #FFFFFF;
-    border: 1px solid var(--slds-g-color-neutral-base-50);
-    border-radius: var(--slds-g-radius-border-2);
-    min-height: 40px;
-}
-
-.section-item-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.drag-icon {
-    color: #747474;
-}
-
-.section-item-label {
-    font-family: "Segoe UI", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #0B5CAB;
-}
-
-.section-dropdown-container {
-    position: relative;
-}
-
-.section-dropdown-button {
-    border-color: var(--slds-g-color-neutral-base-50) !important;
-}
-
-.section-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    z-index: 9999;
-    margin-top: 4px;
-    min-width: 150px;
-}
-
-.add-section-button {
-    margin-top: 8px;
-    align-self: flex-start;
-}
-
-
 .data-cloud-combobox {
     width: 100%;
 }
@@ -884,65 +812,314 @@ lightning-accordion {
     --slds-c-accordion-section-color-background: var(--slds-g-color-neutral-base-100);
 }
 
-/* Add spacing between accordion summary and content - only for Customize Sections */
-lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
-    padding-top: 12px;
+/* Accordion Section Label Styling - Match Prototype 1 Profile Name */
+.properties-panel lightning-accordion-section::part(summary) {
+    cursor: pointer;
+    color: #0b5cab;
+    transition: color 0.2s ease;
 }
 
-/* Alternative approach for content sections - only for section-items */
-.section-items {
+.properties-panel lightning-accordion-section:hover::part(summary) {
+    text-decoration: underline;
+    color: #005fb2;
+}
+
+/* Prototype 2 specific accordion styling */
+.section-content {
+    padding: 16px 0;
+}
+
+.section-description {
+    color: var(--slds-g-color-neutral-base-50);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Profile Section Specific Styling */
+.profile-section-content {
+    padding: 8px 0;
+}
+
+.profile-description {
+    color: #181818;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 0 16px 0;
+    width: 250px;
+}
+
+/* Contact Section Specific Styling */
+.contact-section-content {
+    padding: 8px 0;
+}
+
+.contact-description {
+    color: #181818;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 0 16px 0;
+    width: 250px;
+}
+
+/* Insight Section Specific Styling */
+.insight-section-content {
+    padding: 8px 0;
+}
+
+.insight-description {
+    color: #181818;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 0 16px 0;
+    width: 250px;
+}
+
+
+.profile-field-label {
+    color: #444444 !important;
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+}
+
+.basic-profile-fields-section {
     margin-top: 12px;
 }
 
-/* SLDS Scoped Notification Styling */
-.slds-scoped-notification {
+.basic-contact-fields-section {
+    margin-top: 12px;
+}
+
+.additional-fields-section {
+    margin-top: 12px;
+}
+
+.set-visible-toggle-section {
+    margin-top: 12px;
+}
+
+.additional-fields-container {
+    max-width: 250px;
+}
+
+.additional-fields-pills-section {
+    margin-top: 6px;
+}
+
+/* Additional Fields Label Row */
+.additional-fields-label-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.additional-fields-label-row .profile-field-label {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 18px !important;
+}
+
+.info-icon-container {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon {
+    width: 12px;
+    height: 12px;
+    fill: #747474;
+    display: block;
+}
+
+/* Field Pill Layout - Matching Figma Design */
+.field-pill-container {
+    margin-bottom: 8px;
+}
+
+.field-pill {
+    background: white;
+    border: 1px solid #747474;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.field-pill-drag-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.drag-icon {
+    width: 16px;
+    height: 16px;
+    fill: #747474;
+}
+
+.field-pill-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    height: 38px;
+    cursor: pointer;
+}
+
+.field-display-name {
+    color: #0b5cab; /* SLDS link color */
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+    width: 100%;
+    text-decoration: none;
+    transition: text-decoration 0.15s ease-in-out;
+}
+
+.field-pill-content:hover .field-display-name {
+    text-decoration: underline;
+}
+
+.field-pill-close-icon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 16px;
+    height: 16px;
+    fill: #747474;
+}
+
+.add-field-button {
+    border: 1px solid #747474 !important;
+    background: white !important;
+    color: #0176d3 !important;
+    height: 32px !important;
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 13px !important;
+}
+
+
+/* Custom toggle styling to match Figma */
+.profile-section-content .slds-checkbox_toggle {
+    --slds-c-checkbox-toggle-color-background: #0176d3;
+    --slds-c-checkbox-toggle-color-background-checked: #0176d3;
+}
+
+/* Custom checkbox styling */
+.profile-section-content lightning-checkbox-group {
+    --slds-c-checkbox-color-border: #747474;
+}
+
+/* Field Configuration Popover */
+.field-config-popover {
+    width: 277px;  /* Matching Figma design */
+    min-height: 265px;  /* Matching Figma design */
+    background: var(--slds-g-color-neutral-base-100, #ffffff);
+    border: 1px solid var(--slds-g-color-border-base-1, #747474);  /* Matching Figma border color */
+    border-radius: var(--slds-g-border-radius-4, 0.25rem);
+    box-shadow: var(--slds-g-shadow-4, 0 2px 4px rgba(0, 0, 0, 0.18));
+    z-index: 9999;
+}
+
+.field-config-popover .slds-popover__body {
+    padding: 1rem;
+}
+
+/* Popover field spacing - 12px between fields */
+.field-config-popover .popover-field {
     margin-bottom: 12px;
 }
 
-.slds-scoped-notification .slds-text-link {
-    color: #0b5cab;
-    text-decoration: none;
+/* Done Button Styling */
+.field-config-popover .config-done-button {
+    margin-top: 0.5rem;
 }
 
-.slds-scoped-notification .slds-text-link:hover {
-    text-decoration: underline;
+/* Close Button Styling */
+.field-config-popover .slds-popover__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
 }
 
-/* Clickable Profile Name */
-.profile-name-clickable {
-    cursor: pointer;
-    color: #0b5cab;
-    transition: color 0.2s ease;
+/* Popover nubbin styling */
+.field-config-popover.slds-nubbin_left::before,
+.field-config-popover.slds-nubbin_left::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
 }
 
-.profile-name-clickable:hover {
-    text-decoration: underline;
-    color: #005fb2;
+.field-config-popover.slds-nubbin_left::before {
+    border-right-color: var(--slds-g-color-border-base-1, #c9c9c9);
+    left: -9px;
 }
 
-/* Clickable Contact Name */
-.contact-name-clickable {
-    cursor: pointer;
-    color: #0b5cab;
-    transition: color 0.2s ease;
+.field-config-popover.slds-nubbin_left::after {
+    border-right-color: var(--slds-g-color-neutral-base-100, #ffffff);
+    left: -8px;
 }
 
-.contact-name-clickable:hover {
-    text-decoration: underline;
-    color: #005fb2;
+.field-config-popover.slds-nubbin_right::before,
+.field-config-popover.slds-nubbin_right::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -8px;
+    transform: translateY(-50%);
+    border: 8px solid transparent;
 }
 
-/* Clickable Insights Name */
-.insights-name-clickable {
-    cursor: pointer;
-    color: #0b5cab;
-    transition: color 0.2s ease;
+.field-config-popover.slds-nubbin_right::before {
+    border-left-color: var(--slds-g-color-border-base-1, #c9c9c9);
+    right: -9px;
 }
 
-.insights-name-clickable:hover {
-    text-decoration: underline;
-    color: #005fb2;
+.field-config-popover.slds-nubbin_right::after {
+    border-left-color: var(--slds-g-color-neutral-base-100, #ffffff);
+    right: -8px;
 }
+
+/* Popover form styling */
+.field-config-popover .slds-form-element__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--slds-g-color-neutral-base-50, #444444);
+}
+
+.field-config-popover .config-combobox,
+.field-config-popover .config-input {
+    font-size: 0.875rem;
+}
+
+.field-config-popover .config-done-button {
+    font-size: 0.875rem;
+}
+
 
 /* Floating Prototype Switcher - Liquid Glass Style */
 .floating-prototype-switcher {
@@ -1049,203 +1226,6 @@ lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-/* Prototype-specific Styles */
-.prototype-2 {
-    background: #ffffff;
-}
-
-/* Prototype 2 uses the same layout as Prototype 1 */
-
-/* Keep the component panel for Prototype 2 - same as Prototype 1 */
-
-/* Prototype 2 specific accordion styling */
-.section-content {
-    padding: 16px 0;
-}
-
-.section-description {
-    color: var(--slds-g-color-neutral-base-50);
-    font-size: 13px;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Profile Section Specific Styling */
-.profile-section-content {
-    padding: 8px 0;
-}
-
-.profile-description {
-    color: #181818;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 13px;
-    line-height: 20px;
-    margin: 0 0 16px 0;
-    width: 250px;
-}
-
-.profile-field-label {
-    color: #444444 !important;
-    font-family: "Segoe UI", sans-serif !important;
-    font-size: 12px !important;
-    font-weight: 700 !important;
-    line-height: 18px !important;
-}
-
-.basic-profile-fields-section {
-    margin-top: 12px;
-}
-
-.additional-fields-section {
-    margin-top: 12px;
-}
-
-.set-visible-toggle-section {
-    margin-top: 12px;
-}
-
-.additional-fields-container {
-    max-width: 250px;
-}
-
-.additional-fields-pills-section {
-    margin-top: 6px;
-}
-
-/* Additional Fields Label Row */
-.additional-fields-label-row {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
-.additional-fields-label-row .profile-field-label {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 18px !important;
-}
-
-.info-icon-container {
-    flex-shrink: 0;
-    width: 12px;
-    height: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.info-icon {
-    width: 12px;
-    height: 12px;
-    fill: #747474;
-    display: block;
-}
-
-/* Field Pill Layout - Matching Figma Design */
-.field-pill-container {
-    margin-bottom: 8px;
-}
-
-.field-pill {
-    background: white;
-    border: 1px solid #747474;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 6px 12px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.field-pill-drag-icon {
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-}
-
-.drag-icon {
-    width: 16px;
-    height: 16px;
-    fill: #747474;
-}
-
-.field-pill-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 0;
-    height: 38px;
-}
-
-.field-display-name {
-    color: #014486;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 20px;
-    margin: 0;
-    width: 100%;
-}
-
-.field-pill-close-icon {
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-}
-
-.close-icon {
-    width: 16px;
-    height: 16px;
-    fill: #747474;
-}
-
-.add-field-button {
-    border: 1px solid #747474 !important;
-    background: white !important;
-    color: #0176d3 !important;
-    height: 32px !important;
-    font-family: "Segoe UI", sans-serif !important;
-    font-size: 13px !important;
-}
-
-
-/* Custom toggle styling to match Figma */
-.profile-section-content lightning-input[type="toggle"] {
-    --slds-c-checkbox-toggle-color-background: #0176d3;
-    --slds-c-checkbox-toggle-color-background-checked: #0176d3;
-}
-
-/* Custom checkbox styling */
-.profile-section-content lightning-checkbox-group {
-    --slds-c-checkbox-color-border: #747474;
-}
-
-.prototype-3 {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    min-height: 100vh;
-}
-
-.prototype-3-header {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: white;
-}
-
-.prototype-3-header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    font-weight: 300;
-}
-
-.prototype-3-header p {
-    font-size: 1.2rem;
-    opacity: 0.8;
 }
 
 /* Focus States */

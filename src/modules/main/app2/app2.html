@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="app-container">
+  <div class="app-container prototype-2">
     <!-- Header Section -->
     <div class="slds-builder-header_container">
       <!-- Builder Header -->
@@ -60,7 +60,7 @@
           </div>
         </div>
         
-        <!-- Main Title (Flexible) -->
+        <!-- Main Title (Flexible) - MODIFIED FOR PROTOTYPE 2 -->
         <div class="slds-builder-header__item slds-builder-header__item_main">
           <div class="slds-builder-header__item-label">
             <span class="slds-truncate">Unified Profile for Contact</span>
@@ -318,7 +318,7 @@
       </div>
     </div>
 
-    <!-- Component Panel -->
+    <!-- Component Panel - SAME AS PROTOTYPE 1 -->
     <div class="component-panel">
       <!-- Tabs -->
       <div class="panel-tabs">
@@ -378,7 +378,7 @@
       </div>
     </div>
     
-    <!-- Right Properties Panel -->
+    <!-- Right Properties Panel - PROTOTYPE 2 SPECIFIC -->
     <div class="properties-panel">
       <!-- Header with Breadcrumb -->
       <div class="properties-header">
@@ -430,152 +430,222 @@
           </div>
         
         <!-- Properties Accordion -->
-        <lightning-accordion 
-          allow-multiple-sections-open 
+        <lightning-accordion
           active-section-name={activeAccordionSection}
-          onsectiontoggle={handleAccordionToggle}>
-          <!-- Customize Sections -->
-          <lightning-accordion-section name="customizeSections" label="Customize Sections" onsectiontoggle={handleCustomizeSectionToggle} is-open>
-            <div class="section-items">
-          <!-- Scoped Notification -->
-          <div class="slds-scoped-notification slds-media slds-scoped-notification_light" role="status">
-            <div class="slds-media__figure">
-              <lightning-icon 
-                icon-name="utility:info" 
-                size="small" 
-                class="slds-icon_small">
-              </lightning-icon>
-            </div>
-            <div class="slds-media__body">
-              <p>
-                Field visibility in each section depends on user permissions defined by policies. 
-                The preview displays placeholder data only. 
+          onsectiontoggle={handleAccordionToggle}
+          onclick={handleAccordionClick}>
+          <!-- Customize Profile Section -->
+          <lightning-accordion-section name="customizeProfileSection" label="Customize Profile Section">
+            <div class="profile-section-content">
+              <!-- Description Text -->
+              <p class="profile-description">
+                The data in this section is sourced from the selected unified object. 
                 <a href="#" class="slds-text-link">Learn More</a>
               </p>
-            </div>
-          </div>
               
-              <!-- Profile Section -->
-              <div class="section-item">
-                <div class="section-item-content">
-                  <lightning-icon 
-                    icon-name="utility:drag_and_drop" 
-                    size="x-small" 
-                    class="drag-icon">
-                  </lightning-icon>
-                  <span class="section-item-label profile-name-clickable" onclick={handleProfileNameClick}>Profile</span>
-                </div>
-                <div class="section-dropdown-container">
-                  <button class="slds-button slds-button_icon slds-button_icon-border slds-button_icon-small section-dropdown-button" onclick={handleProfileMenu}>
-                    <lightning-icon icon-name="utility:down" size="x-small" alternative-text="More actions"></lightning-icon>
-                    <span class="slds-assistive-text">More actions</span>
-                  </button>
-                  <div class="slds-dropdown slds-dropdown_right section-menu" if:true={showProfileMenu}>
-                    <ul class="slds-dropdown__list" role="menu">
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileEdit}>
-                          <span class="slds-truncate">Edit</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileSetInvisible}>
-                          <span class="slds-truncate">Set As Invisible</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileDelete}>
-                          <span class="slds-truncate">Delete</span>
-                        </a>
-                      </li>
-                    </ul>
+              <!-- Set as Visible Toggle -->
+              <div class="slds-form-element set-visible-toggle-section">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox_toggle slds-grid">
+                    <span class="slds-form-element__label">Set as Visible</span>
+                    <label class="slds-checkbox_toggle slds-grid">
+                      <input type="checkbox" name="profileVisible" checked aria-describedby="toggle-description" />
+                      <span id="toggle-description" class="slds-checkbox_faux_container" aria-live="assertive">
+                        <span class="slds-checkbox_faux"></span>
+                        <span class="slds-checkbox_on">Visible</span>
+                        <span class="slds-checkbox_off">Invisible</span>
+                      </span>
+                    </label>
                   </div>
                 </div>
               </div>
               
-              <!-- Contact Section -->
-              <div class="section-item">
-                <div class="section-item-content">
-                  <lightning-icon 
-                    icon-name="utility:drag_and_drop" 
-                    size="x-small" 
-                    class="drag-icon">
-                  </lightning-icon>
-                  <span class="section-item-label contact-name-clickable" onclick={handleContactNameClick}>Contact</span>
-                </div>
-                <div class="section-dropdown-container">
-                  <button class="slds-button slds-button_icon slds-button_icon-border slds-button_icon-small section-dropdown-button" onclick={handleContactMenu}>
-                    <lightning-icon icon-name="utility:down" size="x-small" alternative-text="More actions"></lightning-icon>
-                    <span class="slds-assistive-text">More actions</span>
-                  </button>
-                  <div class="slds-dropdown slds-dropdown_right section-menu" if:true={showContactMenu}>
-                    <ul class="slds-dropdown__list" role="menu">
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactEdit}>
-                          <span class="slds-truncate">Edit</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactSetInvisible}>
-                          <span class="slds-truncate">Set As Invisible</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactDelete}>
-                          <span class="slds-truncate">Delete</span>
-                        </a>
-                      </li>
-                    </ul>
+              <!-- Basic Profile Fields -->
+              <div class="slds-form-element basic-profile-fields-section">
+                <fieldset class="slds-form-element">
+                  <legend class="slds-form-element__legend slds-form-element__label profile-field-label">Basic Profile Fields</legend>
+                  <div class="slds-form-element__control">
+                    <lightning-checkbox-group 
+                      name="basicProfileFields"
+                      label=""
+                      options={basicProfileFieldOptions}
+                      value={selectedBasicFields}
+                      variant="label-hidden">
+                    </lightning-checkbox-group>
                   </div>
-                </div>
+                </fieldset>
               </div>
               
-              <!-- Insights Section -->
-              <template if:true={showInsightsSection}>
-                <div class="section-item">
-                  <div class="section-item-content">
-                    <lightning-icon 
-                      icon-name="utility:drag_and_drop" 
-                      size="x-small" 
-                      class="drag-icon">
-                    </lightning-icon>
-                    <span class="section-item-label insights-name-clickable" onclick={handleInsightsNameClick}>Insights</span>
-                  </div>
-                  <div class="section-dropdown-container">
-                    <button class="slds-button slds-button_icon slds-button_icon-border slds-button_icon-small section-dropdown-button" onclick={handleInsightsMenu}>
-                      <lightning-icon icon-name="utility:down" size="x-small" alternative-text="More actions"></lightning-icon>
-                      <span class="slds-assistive-text">More actions</span>
-                    </button>
-                    <div class="slds-dropdown slds-dropdown_right section-menu" if:true={showInsightsMenu}>
-                      <ul class="slds-dropdown__list" role="menu">
-                        <li class="slds-dropdown__item" role="presentation">
-                          <a href="#" role="menuitem" onclick={handleInsightsEdit}>
-                            <span class="slds-truncate">Edit</span>
-                          </a>
-                        </li>
-                        <li class="slds-dropdown__item" role="presentation">
-                          <a href="#" role="menuitem" onclick={handleInsightsSetInvisible}>
-                            <span class="slds-truncate">Set As Invisible</span>
-                          </a>
-                        </li>
-                        <li class="slds-dropdown__item" role="presentation">
-                          <a href="#" role="menuitem" onclick={handleInsightsDelete}>
-                            <span class="slds-truncate">Delete</span>
-                          </a>
-                        </li>
-                      </ul>
+              <!-- Additional Fields -->
+              <div class="slds-form-element additional-fields-section">
+                <div class="slds-form-element__label-container">
+                  <div class="additional-fields-label-row">
+                    <label class="slds-form-element__label profile-field-label">Additional Fields (Up to 5)</label>
+                    <div class="info-icon-container">
+                      <svg class="info-icon" viewBox="0 0 520 520">
+                        <path d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"/>
+                      </svg>
                     </div>
                   </div>
                 </div>
-              </template>
+                
+                <!-- Field Pills -->
+                <div class="additional-fields-container additional-fields-pills-section">
+                          <template for:each={additionalProfileFields} for:item="field">
+                            <div key={field.id} class="field-pill-container" data-field-id={field.id}>
+                      <div class="field-pill">
+                        <div class="field-pill-drag-icon">
+                          <svg class="drag-icon" viewBox="0 0 52 52">
+                            <path d="M20 4c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 16c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 28c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 40c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4z"/>
+                          </svg>
+                        </div>
+                        <div class="field-pill-content" onclick={handleEditField} data-field-id={field.id}>
+                          <div class="field-display-name">{field.displayName}</div>
+                        </div>
+                        <div class="field-pill-close-icon" onclick={handleRemoveField} data-field-id={field.id}>
+                          <svg class="close-icon" viewBox="0 0 520 520">
+                            <path d="M310 254l130-131c6-6 6-15 0-21l-20-21c-6-6-15-6-21 0L268 212a10 10 0 01-14 0L123 80c-6-6-15-6-21 0l-21 21c-6 6-6 15 0 21l131 131c4 4 4 10 0 14L80 399c-6 6-6 15 0 21l21 21c6 6 15 6 21 0l131-131a10 10 0 0114 0l131 131c6 6 15 6 21 0l21-21c6-6 6-15 0-21L310 268a10 10 0 010-14z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                  
+                  <!-- Add Field Button -->
+                  <button class="slds-button slds-button_neutral add-field-button slds-m-top_x-small" type="button" onclick={handleAddProfileField} disabled={isAddFieldButtonDisabled}>
+                    <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true" viewBox="0 0 520 520">
+                      <path d="M300 290h165c8 0 15-7 15-15v-30c0-8-7-15-15-15H300c-6 0-10-4-10-10V55c0-8-7-15-15-15h-30c-8 0-15 7-15 15v165c0 6-4 10-10 10H55c-8 0-15 7-15 15v30c0 8 7 15 15 15h165c6 0 10 4 10 10v165c0 8 7 15 15 15h30c8 0 15-7 15-15V300c0-6 4-10 10-10z"/>
+                    </svg>
+                    Add Field
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </lightning-accordion-section>
+          
+          <!-- Customize Contact Section -->
+          <lightning-accordion-section name="customizeContactSection" label="Customize Contact Section">
+            <div class="contact-section-content">
+              <!-- Description Text -->
+              <p class="contact-description">
+                The data in this section is sourced from the contact point objects. <a href="#" class="slds-text-link">Learn More</a>
+              </p>
               
-              <!-- Add Section Button -->
-              <lightning-button
-                label="Add Section"
-                icon-name="utility:add"
-                variant="neutral"
-                class="add-section-button"
-                onclick={handleAddSectionClick}>
-              </lightning-button>
+              <!-- Set as Visible Toggle -->
+              <div class="slds-form-element set-visible-toggle-section">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox_toggle slds-grid">
+                    <span class="slds-form-element__label">Set as Visible</span>
+                    <label class="slds-checkbox_toggle slds-grid">
+                      <input type="checkbox" name="contactVisible" checked aria-describedby="contact-toggle-description" />
+                      <span id="contact-toggle-description" class="slds-checkbox_faux_container" aria-live="assertive">
+                        <span class="slds-checkbox_faux"></span>
+                        <span class="slds-checkbox_on">Visible</span>
+                        <span class="slds-checkbox_off">Invisible</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Basic Contact Fields -->
+              <div class="slds-form-element basic-contact-fields-section">
+                <fieldset class="slds-form-element">
+                  <legend class="slds-form-element__legend slds-form-element__label profile-field-label">Basic Contact Fields</legend>
+                  <div class="slds-form-element__control">
+                    <lightning-checkbox-group 
+                      name="basicContactFields"
+                      label=""
+                      options={basicContactFieldOptions}
+                      value={selectedBasicContactFields}
+                      variant="label-hidden"
+                      onchange={handleBasicContactFieldChange}>
+                    </lightning-checkbox-group>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </lightning-accordion-section>
+          
+          <!-- Customize Insight Section -->
+          <lightning-accordion-section name="customizeInsightSection" label="Customize Insight Section">
+            <div class="insight-section-content">
+              <!-- Description Text -->
+              <p class="insight-description">
+                The data in this section is sourced from the calculated insights objects and Data Cloud Copy Fields. 
+                <a href="#" class="slds-text-link">Learn More</a>
+              </p>
+              
+              <!-- Set as Visible Toggle -->
+              <div class="slds-form-element set-visible-toggle-section">
+                <div class="slds-form-element__control">
+                  <div class="slds-checkbox_toggle slds-grid">
+                    <span class="slds-form-element__label">Set as Visible</span>
+                    <label class="slds-checkbox_toggle slds-grid">
+                      <input type="checkbox" name="insightVisible" checked aria-describedby="insight-toggle-description" />
+                      <span id="insight-toggle-description" class="slds-checkbox_faux_container" aria-live="assertive">
+                        <span class="slds-checkbox_faux"></span>
+                        <span class="slds-checkbox_on">Visible</span>
+                        <span class="slds-checkbox_off">Invisible</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Insight Fields -->
+              <div class="slds-form-element additional-fields-section">
+                <div class="slds-form-element__label-container">
+                  <div class="additional-fields-label-row">
+                    <label class="slds-form-element__label profile-field-label">Insight Fields (Up to 5)</label>
+                    <div class="info-icon-container">
+                      <svg class="info-icon" viewBox="0 0 520 520">
+                        <path d="M260 20a240 240 0 100 480 240 240 0 100-480zm0 121c17 0 30 13 30 30s-13 30-30 30-30-13-30-30 13-30 30-30zm50 210c0 5-4 9-10 9h-80c-5 0-10-3-10-9v-20c0-5 4-11 10-11 5 0 10-3 10-9v-40c0-5-4-11-10-11-5 0-10-3-10-9v-20c0-5 4-11 10-11h60c5 0 10 5 10 11v80c0 5 4 9 10 9 5 0 10 5 10 11z"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Field Pills -->
+                <div class="additional-fields-container additional-fields-pills-section">
+                          <template for:each={additionalInsightFields} for:item="field">
+                            <div key={field.id} class="field-pill-container" data-field-id={field.id}>
+                      <div class="field-pill">
+                        <div class="field-pill-drag-icon">
+                          <svg class="drag-icon" viewBox="0 0 52 52">
+                            <path d="M20 4c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 16c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 28c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zM20 40c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm12 0c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4z"/>
+                          </svg>
+                        </div>
+                        <div class="field-pill-content" onclick={handleEditInsightField} data-field-id={field.id}>
+                          <div class="field-display-name">{field.displayName}</div>
+                        </div>
+                        <div class="field-pill-close-icon" onclick={handleRemoveInsightField} data-field-id={field.id}>
+                          <svg class="close-icon" viewBox="0 0 520 520">
+                            <path d="M310 254l130-131c6-6 6-15 0-21l-20-21c-6-6-15-6-21 0L268 212a10 10 0 01-14 0L123 80c-6-6-15-6-21 0l-21 21c-6 6-6 15 0 21l131 131c4 4 4 10 0 14L80 399c-6 6-6 15 0 21l21 21c6 6 15 6 21 0l131-131a10 10 0 0114 0l131 131c6 6 15 6 21 0l21-21c6-6 6-15 0-21L310 268a10 10 0 010-14z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </template>
+                  
+                  <!-- Add Field Button -->
+                  <button class="slds-button slds-button_neutral add-field-button slds-m-top_x-small" type="button" onclick={handleAddInsightField} disabled={isAddInsightFieldButtonDisabled}>
+                    <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true" viewBox="0 0 520 520">
+                      <path d="M300 290h165c8 0 15-7 15-15v-30c0-8-7-15-15-15H300c-6 0-10-4-10-10V55c0-8-7-15-15-15h-30c-8 0-15 7-15 15v165c0 6-4 10-10 10H55c-8 0-15 7-15 15v30c0 8 7 15 15 15h165c6 0 10 4 10 10v165c0 8 7 15 15 15h30c8 0 15-7 15-15V300c0-6 4-10 10-10z"/>
+                    </svg>
+                    Add Field
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </lightning-accordion-section>
+          
+          <!-- Customize Custom Section -->
+          <lightning-accordion-section name="customizeCustomSection" label="Customize Custom Section">
+            <div class="section-content">
+              <p class="section-description">This section is not part of this test. Please ignore it.</p>
             </div>
           </lightning-accordion-section>
           
@@ -618,6 +688,75 @@
           </lightning-accordion-section>
         </lightning-accordion>
       </div>
+      
+      <!-- Field Configuration Popover -->
+      <template if:true={showFieldConfigPopover}>
+        <section class={popoverClasses} style={popoverStyle} role="dialog">
+          <button class="slds-button slds-button_icon slds-button_icon-x-small slds-float_right slds-popover__close" onclick={handleConfigClose} title="Close dialog">
+            <lightning-icon icon-name="utility:close" alternative-text="Close dialog" size="x-small"></lightning-icon>
+            <span class="slds-assistive-text">Close dialog</span>
+          </button>
+          <div class="slds-popover__body" id="popover-body">
+            <div class="slds-form">
+              <!-- Calculated Insight Name (only for Insight fields) -->
+              <template if:true={editingFieldId}>
+                <template if:true={isInsightField}>
+                  <lightning-combobox
+                    label="Calculated Insight Name"
+                    name="configCalculatedInsightName"
+                    value={configCalculatedInsightName}
+                    placeholder="Select calculated insight"
+                    options={calculatedInsightNameOptions}
+                    onchange={handleCalculatedInsightNameChange}
+                    class="popover-field">
+                  </lightning-combobox>
+                </template>
+              </template>
+
+              <!-- Metric Name / Field Name -->
+              <lightning-combobox
+                label={fieldNameLabel}
+                name="configFieldName"
+                value={configFieldName}
+                placeholder={fieldNamePlaceholder}
+                options={fieldNameOptionsToUse}
+                onchange={handleFieldNameConfigChange}
+                class="popover-field">
+              </lightning-combobox>
+
+              <!-- Display Label -->
+              <lightning-input
+                label="Display Label"
+                name="configDisplayLabel"
+                value={configDisplayLabel}
+                onchange={handleDisplayLabelConfigChange}
+                class="popover-field">
+              </lightning-input>
+
+              <!-- Icon -->
+              <lightning-combobox
+                label="Icon"
+                name="configIcon"
+                value={configIcon}
+                placeholder="Select an icon"
+                options={currentIconOptions}
+                onchange={handleIconConfigChange}
+                class="popover-field">
+              </lightning-combobox>
+
+              <!-- Done Button -->
+              <div class="slds-text-align_right">
+                <lightning-button
+                  label="Done"
+                  variant="neutral"
+                  disabled={isDoneButtonDisabled}
+                  onclick={handleConfigDone}>
+                </lightning-button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </template>
     </div>
   </div>
 
@@ -649,4 +788,5 @@
     onback={handleAddInsightBack}
     onsave={handleAddInsightSave}>
   </main-add-insight-modal>
+
 </template>

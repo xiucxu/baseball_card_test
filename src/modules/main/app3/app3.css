@@ -1,3 +1,12 @@
+/* Force no scrollbars on page */
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden !important;
+    height: 100%;
+    width: 100%;
+}
+
 /* App Container */
 .app-container {
     height: 100vh;
@@ -6,6 +15,230 @@
     flex-direction: column;
     background-color: var(--slds-g-color-neutral-base-100);
     font-family: var(--slds-g-font-family-text);
+    overflow: hidden;
+}
+
+
+/* Field Configuration Hover Effects */
+.field-configurable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 0px;
+    padding: 0px 0px 0px 0px !important;
+    margin: -2px -2px 14px -2px !important;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+/* More specific selector for contact detail items that are configurable */
+.slds-media.contact-detail-item.field-configurable {
+    padding: 0px !important;
+    margin-bottom: 14px !important;
+}
+
+/* Remove bottom margin from the last field in each section */
+.slds-media.contact-detail-item.field-configurable:last-child {
+    margin-bottom: 0px !important;
+}
+
+.field-configurable:hover {
+    background-color: rgba(13, 157, 218, 0.1); /* Light blue background matching Figma */
+    border: 2px solid #0d9dda; /* Cloud blue border from Figma */
+}
+
+.field-configurable.selected {
+    background-color: rgba(1, 118, 211, 0.1); /* Slightly different blue for selection */
+    border: 2px solid #0176D3; /* Same color as selection-border */
+}
+
+/* Selection Handles (Plus Icons) */
+.field-configurable:hover::before,
+.field-configurable:hover::after,
+.field-configurable.selected::before,
+.field-configurable.selected::after {
+    content: '+';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #0d9dda; /* Cloud blue from Figma */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.field-configurable:hover::before,
+.field-configurable.selected::before {
+    top: -5px; /* Top handle */
+}
+
+.field-configurable:hover::after,
+.field-configurable.selected::after {
+    bottom: -5px; /* Bottom handle */
+}
+
+/* Selected state uses foundation blue for handles */
+.field-configurable.selected::before,
+.field-configurable.selected::after {
+    background-color: #0176D3; /* Same color as selection-border */
+}
+
+/* Hidden classes for selection border and handles */
+.selection-border-hidden,
+.resize-handle-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    border: none !important;
+}
+
+
+/* Field Configuration Panel */
+.field-config-panel {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.field-config-header {
+    background-color: #ffffff;
+    height: 44px;
+    padding: 10px 12px;
+    border-bottom: 1px solid #c9c9c9;
+    box-shadow: 0px 1px 0px 0px #c9c9c9;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.breadcrumb-link {
+    color: #0b5cab;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 400;
+}
+
+.breadcrumb-separator {
+    color: #181818;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.breadcrumb-current {
+    color: #181818;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 400;
+}
+
+.field-config-body {
+    flex: 1;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.field-config-description {
+    margin-bottom: 12px;
+}
+
+.description-text {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    color: #181818;
+    margin: 0;
+}
+
+.learn-more-link {
+    color: #0b5cab;
+    text-decoration: none;
+}
+
+.learn-more-link:hover {
+    text-decoration: underline;
+}
+
+.field-config-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Remove bottom margin for specific fields */
+.field-config-form .popover-field {
+    margin-bottom: 0;
+}
+
+/* Only Icon field keeps bottom margin if needed */
+.field-config-form lightning-combobox[name="configIcon"] {
+    margin-bottom: 0;
+}
+
+/* Field Visibility Accordion */
+.field-visibility-accordion {
+    margin-top: 12px;
+}
+
+.field-visibility-accordion .visibility-content {
+    padding: 12px 0;
+}
+
+.field-visibility-accordion .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.field-visibility-accordion .filter-section label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #181818;
+}
+
+.field-visibility-accordion .add-filter-button {
+    align-self: flex-start;
+}
+
+/* Custom styling for form elements to match Figma */
+.field-config-form .slds-form-element__label {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: #444444;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.field-config-form .slds-required {
+    color: #ba0517;
+    font-size: 12px;
+}
+
+/* Form components use standard SLDS styling */
+
+.back-button {
+    font-size: var(--slds-g-font-size-2);
 }
 
 /* Builder Header Container */
@@ -134,7 +367,6 @@
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 925px;
 }
 
 /* Drop Zones */
@@ -160,7 +392,7 @@
     top: 163px;
     left: 16px;
     width: calc(33.333% - 8px); /* 4/12 columns with gutter adjustment */
-    min-height: 198px; /* Reduced from 214px to 198px (16px less) */
+    min-height: 214px;
     height: auto;
 }
 
@@ -252,7 +484,7 @@
 .contact-separator {
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
-    margin: 16px 0;
+    margin: 2px 0 2px 0; /* Changed top margin to 2px */
     padding: 0;
     width: 100%;
 }
@@ -309,7 +541,7 @@
 .contact-details-section {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 0; /* Removed gap entirely */
 }
 
 .contact-detail-item {
@@ -896,7 +1128,7 @@ lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
 
 /* SLDS Scoped Notification Styling */
 .slds-scoped-notification {
-    margin-bottom: 12px;
+    margin-bottom: 0;
 }
 
 .slds-scoped-notification .slds-text-link {
@@ -1095,7 +1327,7 @@ lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
 }
 
 .basic-profile-fields-section {
-    margin-top: 12px;
+    margin-top: 0;
 }
 
 .additional-fields-section {
@@ -1226,8 +1458,9 @@ lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
     --slds-c-checkbox-color-border: #747474;
 }
 
+/* Prototype 3 specific styling - Blue gradient theme */
 .prototype-3 {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
 }
 
@@ -1253,6 +1486,232 @@ lightning-accordion-section[name="customizeSections"] .slds-accordion__content {
 .header-item:focus {
     outline: 2px solid var(--slds-g-color-brand-base-10);
     outline-offset: -2px;
+}
+
+/* Profile Section Specific Styling (from Prototype 2) */
+.profile-section-content {
+    padding: 8px 0;
+}
+
+.profile-description {
+    color: #181818;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0 0 16px 0;
+    width: 250px;
+}
+
+.profile-field-label {
+    color: #444444 !important;
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 18px !important;
+}
+
+.basic-profile-fields-section {
+    margin-top: 0;
+}
+
+.additional-fields-section {
+    margin-top: 12px;
+}
+
+.set-visible-toggle-section {
+    margin-top: 12px;
+}
+
+.additional-fields-container {
+    max-width: 250px;
+}
+
+.additional-fields-pills-section {
+    margin-top: 6px;
+}
+
+/* Additional Fields Label Row */
+.additional-fields-label-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.additional-fields-label-row .profile-field-label {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 18px !important;
+}
+
+.info-icon-container {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-icon {
+    width: 12px;
+    height: 12px;
+    fill: #747474;
+    display: block;
+}
+
+/* Section Pill Layout - Matching Figma Design */
+.section-pill-container {
+    margin-bottom: var(--slds-g-spacing-2);
+}
+
+.section-pill {
+    background: var(--slds-g-color-neutral-base-100);
+    border: 1px solid #757575;
+    border-radius: var(--slds-g-radius-border-1);
+    padding: var(--slds-g-spacing-3);
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--slds-g-spacing-2);
+}
+
+/* First Row: Drag Handle, Section Name, Dropdown Button */
+.section-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.section-drag-handle {
+    --slds-c-icon-color-foreground: var(--slds-g-color-neutral-base-50);
+    flex-shrink: 0;
+}
+
+.section-name {
+    font-family: var(--slds-g-font-family-text);
+    font-size: var(--slds-g-font-size-3);
+    font-weight: var(--slds-g-font-weight-bold);
+    line-height: var(--slds-g-line-height-heading);
+    color: var(--slds-g-color-neutral-base-10);
+    flex: 1;
+    margin-left: var(--slds-g-spacing-2);
+}
+
+.section-dropdown-button {
+    --slds-c-button-color-background: var(--slds-g-color-neutral-base-100);
+    --slds-c-button-color-border: var(--slds-g-color-border-2);
+    --slds-c-icon-color-foreground: var(--slds-g-color-neutral-base-50);
+    flex-shrink: 0;
+}
+
+.section-dropdown-button:hover {
+    --slds-c-button-color-background: var(--slds-g-color-neutral-base-95);
+}
+
+/* Style for invisible sections */
+.section-pill[data-visible="false"] {
+    opacity: 0.6;
+}
+
+.section-pill[data-visible="false"] .section-name {
+    text-decoration: line-through;
+    color: var(--slds-g-color-neutral-base-50);
+}
+
+/* Field Counter Input */
+.field-counter-input {
+    margin-top: 0;
+}
+
+/* Contact Region Box - Matching Figma Design */
+.contact-region-box {
+    background: transparent; /* No background color, just the dashed border */
+    border: 1px dashed #2e2e2e; /* Dashed border from Figma */
+    border-radius: var(--slds-g-radius-border-1);
+    padding: var(--slds-g-spacing-1); /* Minimal padding to fit tightly around content */
+    margin: var(--slds-g-spacing-2) 0;
+    position: relative;
+}
+
+/* Remove extra spacing between Email and Phone items within the region box */
+.contact-region-box .contact-detail-item {
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 12px; /* Add 12px bottom padding */
+}
+
+.contact-region-box .contact-detail-item:last-child {
+    padding-bottom: 0; /* Remove bottom padding from last item */
+}
+
+.contact-region-box .contact-detail-item:not(:last-child) {
+    margin-bottom: 2px; /* Very minimal spacing between Email and Phone */
+}
+
+/* Ensure tight spacing for the media elements within the region */
+.contact-region-box .slds-media {
+    margin-bottom: 0;
+}
+
+/* Section dividers now use the existing .contact-separator class */
+
+/* New Section Region Box - Matching Contact Region Box */
+.new-section-region-box {
+    background: transparent; /* No background color, just the dashed border */
+    border: 1px dashed #2e2e2e; /* Dashed border from Figma */
+    border-radius: var(--slds-g-radius-border-1);
+    padding: var(--slds-g-spacing-1); /* Minimal padding to fit tightly around content */
+    margin: var(--slds-g-spacing-2) 0;
+    position: relative;
+}
+
+/* New Section Contact Detail Items - Same as Contact Region Box */
+.new-section-region-box .contact-detail-item {
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 12px; /* Add 12px bottom padding */
+}
+
+.new-section-region-box .contact-detail-item:last-child {
+    padding-bottom: 0; /* Remove bottom padding from last item */
+}
+
+.new-section-region-box .contact-detail-item:not(:last-child) {
+    margin-bottom: 2px; /* Very minimal spacing between items */
+}
+
+/* Ensure tight spacing for the media elements within the new section region */
+.new-section-region-box .slds-media {
+    margin-bottom: 0;
+}
+
+/* Empty/blank icon placeholder */
+.contact-detail-icon-placeholder {
+    width: 16px; /* Same size as lightning-icon x-small */
+    height: 16px;
+    background: transparent; /* Empty/blank as requested */
+}
+
+.add-field-button {
+    border: 1px solid #747474 !important;
+    background: white !important;
+    color: #0176d3 !important;
+    height: 32px !important;
+    font-family: "Segoe UI", sans-serif !important;
+    font-size: 13px !important;
+}
+
+/* Custom toggle styling to match Figma */
+.profile-section-content lightning-input[type="toggle"] {
+    --slds-c-checkbox-toggle-color-background: #0176d3;
+    --slds-c-checkbox-toggle-color-background-checked: #0176d3;
+}
+
+/* Custom checkbox styling */
+.profile-section-content lightning-checkbox-group {
+    --slds-c-checkbox-color-border: #747474;
 }
 
 /* Accessibility */

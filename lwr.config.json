@@ -14,6 +14,24 @@
       "bootstrap": {
         "syntheticShadow": true
       }
+    },
+    {
+      "id": "app2",
+      "path": "/app2",
+      "rootComponent": "main/app2",
+      "layoutTemplate": "$layoutsDir/index.njk",
+      "bootstrap": {
+        "syntheticShadow": true
+      }
+    },
+    {
+      "id": "app3",
+      "path": "/app3",
+      "rootComponent": "main/app3",
+      "layoutTemplate": "$layoutsDir/index.njk",
+      "bootstrap": {
+        "syntheticShadow": true
+      }
     }
   ],
   "assets": [

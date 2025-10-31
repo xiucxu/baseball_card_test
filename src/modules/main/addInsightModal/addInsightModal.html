@@ -1,0 +1,170 @@
+<template>
+  <main-base-modal 
+    is-open={isOpen} 
+    title={modalTitle}
+    close-on-backdrop-click={allowBackdropClose}
+    onmodalclose={handleModalClose}>
+    
+    <!-- Modal Content -->
+    <div slot="content">
+      <div class="insight-form">
+        <!-- Description Text -->
+        <div class="slds-text-body_regular slds-m-bottom_medium">
+          <p class="slds-text-color_default">
+            The data in this section is sourced from the calculated insights objects and Data Cloud Copy Fields.
+            <a href="#" class="slds-text-link">Learn More</a>
+          </p>
+        </div>
+
+
+        <!-- Additional Fields Section -->
+        <div class="slds-form-element">
+          <div class="slds-form-element__label slds-m-bottom_x-small">
+            <span class="slds-text-heading_small">Insight Fields (Up to 5)</span>
+            <lightning-helptext 
+              content="You can add up to 5 insight fields to display in this section">
+            </lightning-helptext>
+          </div>
+          
+          <!-- Additional Fields List - Above the Add Field button -->
+          <template if:true={hasAdditionalFields}>
+            <div class="slds-m-bottom_small">
+              <template for:each={additionalFields} for:item="field">
+                <div key={field.id} class="field-config-row" style="margin-bottom: 12px;">
+                    <!-- Field Order Number -->
+                    <div class="field-order-number">
+                      <span style="font-family: 'Segoe UI', sans-serif; font-weight: 700; font-size: 12px; line-height: 18px; color: #444444;">{field.order}</span>
+                    </div>
+                    
+                    <!-- Button Group -->
+                    <div class="field-button-group">
+                      <lightning-button-group>
+                        <lightning-button-icon
+                          icon-name="utility:arrowup"
+                          variant="border"
+                          alternative-text="Move up"
+                          title="Move up"
+                          data-field-id={field.id}
+                          onclick={handleMoveFieldUp}>
+                        </lightning-button-icon>
+                        <lightning-button-icon
+                          icon-name="utility:arrowdown"
+                          variant="border"
+                          alternative-text="Move down"
+                          title="Move down"
+                          data-field-id={field.id}
+                          onclick={handleMoveFieldDown}>
+                        </lightning-button-icon>
+                      </lightning-button-group>
+                    </div>
+                    
+                    <!-- Calculated Insight Name -->
+                    <div class="field-input-container">
+                      <lightning-combobox
+                        label="Calculated Insight Name"
+                        placeholder="Select a calculated insight"
+                        value={field.calculatedInsightName}
+                        options={calculatedInsightNameOptions}
+                        data-field-id={field.id}
+                        onchange={handleCalculatedInsightNameChange}
+                        class="figma-field-input">
+                      </lightning-combobox>
+                    </div>
+                    
+                    <!-- Metric Name Selection -->
+                    <div class="field-input-container">
+                      <lightning-combobox
+                        label="Metric Name"
+                        placeholder="Select a metric"
+                        value={field.fieldName}
+                        options={field.fieldNameOptions}
+                        data-field-id={field.id}
+                        onchange={handleFieldNameChange}
+                        class="figma-field-input">
+                      </lightning-combobox>
+                    </div>
+                    
+                    <!-- Display Label -->
+                    <div class="field-input-container">
+                      <lightning-input
+                        label="Display Label"
+                        value={field.displayLabel}
+                        data-field-id={field.id}
+                        onchange={handleDisplayLabelChange}
+                        class="figma-field-input">
+                      </lightning-input>
+                    </div>
+                    
+                    <!-- Icon Selection -->
+                    <div class="field-input-container">
+                      <lightning-combobox
+                        label="Icon"
+                        placeholder="Select an icon"
+                        value={field.icon}
+                        options={iconOptions}
+                        data-field-id={field.id}
+                        onchange={handleIconChange}
+                        class="figma-field-input">
+                      </lightning-combobox>
+                    </div>
+                    
+                    <!-- Delete Button -->
+                    <div class="field-delete-button">
+                      <lightning-button-icon
+                        icon-name="utility:delete"
+                        variant="border-filled"
+                        alternative-text="Remove field"
+                        title="Remove field"
+                        data-field-id={field.id}
+                        onclick={handleRemoveField}
+                        class="figma-delete-btn">
+                      </lightning-button-icon>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </template>
+            
+          <!-- Add Field Button - Below the fields list -->
+          <div class="slds-form-element__control">
+            <lightning-button
+              variant="neutral"
+              label="Add Field"
+              icon-name="utility:add"
+              onclick={handleAddField}>
+            </lightning-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal Footer -->
+    <div slot="footer" class="modal-footer-buttons-edit">
+      <template if:true={isEditMode}>
+        <lightning-button 
+          variant="neutral" 
+          label="Cancel" 
+          onclick={handleCancel}>
+        </lightning-button>
+        <lightning-button 
+          variant="brand" 
+          label="Save" 
+          onclick={handleSave}
+          class="slds-var-m-left_small">
+        </lightning-button>
+      </template>
+      <template if:false={isEditMode}>
+        <lightning-button 
+          variant="neutral" 
+          label="Back" 
+          onclick={handleBack}>
+        </lightning-button>
+        <lightning-button 
+          variant="brand" 
+          label="Save" 
+          onclick={handleSave}>
+        </lightning-button>
+      </template>
+    </div>
+  </main-base-modal>
+</template>

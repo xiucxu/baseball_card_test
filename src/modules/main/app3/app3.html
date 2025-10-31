@@ -187,7 +187,7 @@
         <!-- Bottom Left Region with Selected Component -->
         <div class="drop-zone drop-zone-bottom-left selected-zone">
           <!-- Contact Card Component -->
-          <div class="contact-card">
+          <div class="contact-card" onclick={handleCardClick}>
             <div class="contact-card-content">
               <!-- Header with Avatar and Info -->
               <div class="slds-media contact-header">
@@ -226,47 +226,90 @@
               
               <!-- Contact Details -->
               <div class="contact-details-section">
-                <div class="slds-media contact-detail-item">
-                  <div class="slds-media__figure">
-                    <lightning-icon 
-                      icon-name="utility:email" 
-                      size="x-small" 
-                      class="contact-detail-icon">
-                    </lightning-icon>
-                  </div>
-                  <div class="slds-media__body contact-detail-body">
-                    <div class="contact-detail-label">Email (3 more)</div>
-                    <div class="contact-detail-value">Email@domain.com</div>
-                  </div>
-                </div>
-                
-                <div class="slds-media contact-detail-item phone-field-item">
-                  <div class="slds-media__figure">
-                    <lightning-icon 
-                      icon-name="utility:call" 
-                      size="x-small" 
-                      class="contact-detail-icon">
-                    </lightning-icon>
-                  </div>
-                  <div class="slds-media__body contact-detail-body">
-                    <div class="contact-detail-label">Phone (2 more)</div>
-                    <div class="contact-detail-value">1234567890</div>
-                  </div>
-                </div>
-                
-                <!-- Address Field - Conditionally Rendered -->
-                <template if:true={contactConfig.basicFields.showAddress}>
-                  <div class="slds-media contact-detail-item address-field-item">
+                <!-- Region Box for Email and Phone -->
+                <div class="contact-region-box">
+                  <div class="slds-media contact-detail-item">
                     <div class="slds-media__figure">
                       <lightning-icon 
-                        icon-name="utility:home" 
+                        icon-name="utility:email" 
                         size="x-small" 
                         class="contact-detail-icon">
                       </lightning-icon>
                     </div>
                     <div class="slds-media__body contact-detail-body">
-                      <div class="contact-detail-label">Address</div>
-                      <div class="contact-detail-value">Street, City, State, Zipcode</div>
+                      <div class="contact-detail-label">Email (3 more)</div>
+                      <div class="contact-detail-value">Email@domain.com</div>
+                    </div>
+                  </div>
+                  
+                  <div class="slds-media contact-detail-item phone-field-item">
+                    <div class="slds-media__figure">
+                      <lightning-icon 
+                        icon-name="utility:call" 
+                        size="x-small" 
+                        class="contact-detail-icon">
+                      </lightning-icon>
+                    </div>
+                    <div class="slds-media__body contact-detail-body">
+                      <div class="contact-detail-label">Phone (2 more)</div>
+                      <div class="contact-detail-value">1234567890</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Additional Contact Fields (controlled by Section 1 field count) -->
+                  <template for:each={contactConfig.additionalFields} for:item="field">
+                    <div key={field.id} class="slds-media contact-detail-item additional-contact-field-item">
+                      <div class="slds-media__figure">
+                        <lightning-icon 
+                          icon-name={field.icon} 
+                          size="x-small" 
+                          class="contact-detail-icon">
+                        </lightning-icon>
+                      </div>
+                      <div class="slds-media__body contact-detail-body">
+                        <div class="contact-detail-label">{field.displayLabel}</div>
+                        <div class="contact-detail-value">{field.displayLabel}</div>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                
+                <!-- Additional Sections (Added via "Add Section") -->
+                <template for:each={profileConfig.additionalSections} for:item="section">
+                  <div key={section.id}>
+                    <!-- Section Divider (separate div, same as contact-separator) -->
+                    <div>
+                      <hr class="contact-separator">
+                    </div>
+                    
+                    <!-- New Section with Region Box (like Contact section) -->
+                    <div class="new-section-region-box">
+                      <template for:each={section.fields} for:item="field">
+                        <div key={field.id} 
+                             class="slds-media contact-detail-item field-configurable" 
+                             onclick={handleFieldClick}
+                             onmouseenter={handleFieldHover}
+                             onmouseleave={handleFieldHoverOut}
+                             data-field-id={field.id}
+                             data-section-id={section.id}>
+                          <div class="slds-media__figure">
+                            <template if:true={field.icon}>
+                              <lightning-icon 
+                                icon-name={field.icon}
+                                size="x-small"
+                                class="contact-detail-icon">
+                              </lightning-icon>
+                            </template>
+                            <template if:false={field.icon}>
+                              <div class="contact-detail-icon-placeholder"></div>
+                            </template>
+                          </div>
+                          <div class="slds-media__body contact-detail-body">
+                            <div class="contact-detail-label">{field.label}</div>
+                            <div class="contact-detail-value">{field.value}</div>
+                          </div>
+                        </div>
+                      </template>
                     </div>
                   </div>
                 </template>
@@ -297,12 +340,12 @@
             </div>
           </div>
           
-          <!-- Selection Border and Handles -->
-          <div class="selection-border"></div>
-          <div class="resize-handle resize-handle-top">
+          <!-- Selection Border and Handles (hidden when field is selected) -->
+          <div class={selectionBorderClass}></div>
+          <div class={resizeHandleTopClass}>
             <div class="resize-handle-icon">+</div>
           </div>
-          <div class="resize-handle resize-handle-bottom">
+          <div class={resizeHandleBottomClass}>
             <div class="resize-handle-icon">+</div>
           </div>
         </div>
@@ -380,62 +423,152 @@
     
     <!-- Right Properties Panel -->
     <div class="properties-panel">
-      <!-- Header with Breadcrumb -->
-      <div class="properties-header">
-          <div class="breadcrumb-container">
-            <span class="breadcrumb-link">Page</span>
-            <span class="breadcrumb-separator"> > </span>
-            <span class="breadcrumb-current">Data Cloud Unified Profile</span>
-          </div>
-      </div>
       
-      <!-- Body Content -->
-      <div class="properties-body">
-        <!-- Description Text -->
-        <div class="properties-description">
-          <p>This component displays unified profile data from Data Cloud. To use it, you must first set up the Data Cloud Related Lists in the Object Manager. 
-            <a href="#" class="slds-text-link">Learn More</a>
-          </p>
-        </div>
-        
-          <!-- Instruction Text -->
-          <div class="instruction-text slds-text-body_regular" style="color: #3e3e3c;">
-            Select the Data Space and Unified Object to find your Data Cloud Related Lists.
+      <!-- Field Configuration Panel (shown when field is selected) -->
+      <template if:true={isFieldConfigMode}>
+        <div class="field-config-panel">
+          <!-- Header with Breadcrumb -->
+          <div class="field-config-header">
+            <div class="breadcrumb-container">
+              <span class="breadcrumb-link">Page</span>
+              <span class="breadcrumb-separator">></span>
+              <span class="breadcrumb-current">Field</span>
+            </div>
           </div>
           
-          <!-- Data Cloud Builder Selection -->
-          <div class="properties-field" style="margin-bottom: 0;">
-            <lightning-combobox
-              name="dataCloudBuilder"
-              label="Data Space"
-              placeholder="Select a Data Space"
-              options={dataSpaceOptions}
-              value="default"
-              required
-              class="data-cloud-combobox">
-            </lightning-combobox>
-          </div>
+          <!-- Body Content -->
+          <div class="field-config-body">
+            <!-- Descriptive Text -->
+            <div class="field-config-description">
+              <p class="description-text">
+                Select a field from the objects in the Data Cloud Unified Profile Builder or Data Cloud Copy Fields to display in the component. 
+                <a href="#" class="learn-more-link">Learn More</a>
+              </p>
+            </div>
+            
+            <!-- Form Fields -->
+            <div class="slds-form field-config-form">
+              <!-- Object Name -->
+              <lightning-combobox
+                label="Object Name"
+                name="configObjectName"
+                value={configObjectName}
+                placeholder="Select an object"
+                options={objectNameOptions}
+                onchange={handleObjectNameConfigChange}
+                class="popover-field">
+              </lightning-combobox>
 
-          <!-- Unified Object Selection -->
-          <div class="properties-field">
-            <lightning-combobox
-              name="unifiedObject"
-              label="Unified Object"
-              placeholder="Select a Unified Object"
-              options={unifiedObjectOptions}
-              value="unified-individual"
-              required
-              class="unified-object-combobox">
-            </lightning-combobox>
+              <!-- Metric Name / Field Name -->
+              <lightning-combobox
+                label={fieldNameLabel}
+                name="configFieldName"
+                value={configFieldName}
+                placeholder={fieldNamePlaceholder}
+                options={fieldNameOptionsToUse}
+                onchange={handleFieldNameConfigChange}
+                class="popover-field">
+              </lightning-combobox>
+
+              <!-- Display Label -->
+              <lightning-input
+                label="Display Label"
+                name="configDisplayLabel"
+                value={configDisplayLabel}
+                onchange={handleDisplayLabelConfigChange}
+                class="popover-field">
+              </lightning-input>
+
+              <!-- Icon -->
+              <lightning-combobox
+                label="Icon"
+                name="configIcon"
+                value={configIcon}
+                placeholder="Select an icon"
+                options={currentIconOptions}
+                onchange={handleIconConfigChange}
+                class="popover-field">
+              </lightning-combobox>
+
+              <!-- Set Field Visibility Accordion -->
+              <lightning-accordion allow-multiple-sections-open class="field-visibility-accordion">
+                <lightning-accordion-section name="fieldVisibility" label="Set Field Visibility">
+                  <div class="visibility-content">
+                    <div class="filter-section">
+                      <label>Filter</label>
+                      <lightning-button
+                        label="Add Filter"
+                        icon-name="utility:add"
+                        variant="neutral"
+                        class="add-filter-button">
+                      </lightning-button>
+                    </div>
+                  </div>
+                </lightning-accordion-section>
+              </lightning-accordion>
+            </div>
           </div>
-        
-        <!-- Properties Accordion -->
-        <lightning-accordion 
-          allow-multiple-sections-open 
-          active-section-name={activeAccordionSection}
-          onsectiontoggle={handleAccordionToggle}>
-          <!-- Customize Sections -->
-          <lightning-accordion-section name="customizeSections" label="Customize Sections" onsectiontoggle={handleCustomizeSectionToggle} is-open>
+        </div>
+      </template>
+
+      <!-- Section Management Panel (shown when no field is selected) -->
+      <template if:false={isFieldConfigMode}>
+          <!-- Header with Breadcrumb -->
+          <div class="properties-header">
+              <div class="breadcrumb-container">
+                <span class="breadcrumb-link">Page</span>
+                <span class="breadcrumb-separator"> > </span>
+                <span class="breadcrumb-current">Data Cloud Unified Profile</span>
+              </div>
+          </div>
+          
+          <!-- Body Content -->
+          <div class="properties-body">
+            <!-- Description Text -->
+            <div class="properties-description">
+              <p>This component displays unified profile data from Data Cloud. To use it, you must first set up the Data Cloud Related Lists in the Object Manager. 
+                <a href="#" class="slds-text-link">Learn More</a>
+              </p>
+            </div>
+            
+              <!-- Instruction Text -->
+              <div class="instruction-text slds-text-body_regular" style="color: #3e3e3c;">
+                Select the Data Space and Unified Object to find your Data Cloud Related Lists.
+              </div>
+              
+              <!-- Data Cloud Builder Selection -->
+              <div class="properties-field" style="margin-bottom: 0;">
+                <lightning-combobox
+                  name="dataCloudBuilder"
+                  label="Data Space"
+                  placeholder="Select a Data Space"
+                  options={dataSpaceOptions}
+                  value="default"
+                  required
+                  class="data-cloud-combobox">
+                </lightning-combobox>
+              </div>
+
+              <!-- Unified Object Selection -->
+              <div class="properties-field">
+                <lightning-combobox
+                  name="unifiedObject"
+                  label="Unified Object"
+                  placeholder="Select a Unified Object"
+                  options={unifiedObjectOptions}
+                  value="unified-individual"
+                  required
+                  class="unified-object-combobox">
+                </lightning-combobox>
+              </div>
+          
+          <!-- Properties Accordion -->
+          <lightning-accordion 
+            allow-multiple-sections-open 
+            active-section-name={activeAccordionSection}
+            onsectiontoggle={handleAccordionToggle}>
+            <!-- Customize Sections -->
+            <lightning-accordion-section name="customizeSections" label="Manage Sections" onsectiontoggle={handleCustomizeSectionToggle} is-open>
             <div class="section-items">
           <!-- Scoped Notification -->
           <div class="slds-scoped-notification slds-media slds-scoped-notification_light" role="status">
@@ -455,76 +588,94 @@
             </div>
           </div>
               
-              <!-- Profile Section -->
-              <div class="section-item">
-                <div class="section-item-content">
-                  <lightning-icon 
-                    icon-name="utility:drag_and_drop" 
-                    size="x-small" 
-                    class="drag-icon">
-                  </lightning-icon>
-                  <span class="section-item-label profile-name-clickable" onclick={handleProfileNameClick}>Profile</span>
+              <!-- Profile Section Configuration (from Prototype 2) -->
+              <div class="profile-section-content">
+                <!-- Basic Profile Fields -->
+                <div class="slds-form-element basic-profile-fields-section">
+                  <fieldset class="slds-form-element">
+                    <legend class="slds-form-element__legend slds-form-element__label profile-field-label">Basic Profile Fields</legend>
+                    <div class="slds-form-element__control">
+                      <lightning-checkbox-group 
+                        name="basicProfileFields"
+                        label=""
+                        options={basicProfileFieldOptions}
+                        value={selectedBasicFields}
+                        variant="label-hidden">
+                      </lightning-checkbox-group>
+                    </div>
+                  </fieldset>
                 </div>
-                <div class="section-dropdown-container">
-                  <button class="slds-button slds-button_icon slds-button_icon-border slds-button_icon-small section-dropdown-button" onclick={handleProfileMenu}>
-                    <lightning-icon icon-name="utility:down" size="x-small" alternative-text="More actions"></lightning-icon>
-                    <span class="slds-assistive-text">More actions</span>
-                  </button>
-                  <div class="slds-dropdown slds-dropdown_right section-menu" if:true={showProfileMenu}>
-                    <ul class="slds-dropdown__list" role="menu">
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileEdit}>
-                          <span class="slds-truncate">Edit</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileSetInvisible}>
-                          <span class="slds-truncate">Set As Invisible</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleProfileDelete}>
-                          <span class="slds-truncate">Delete</span>
-                        </a>
-                      </li>
-                    </ul>
+                
+                <!-- Additional Sections -->
+                <div class="slds-form-element additional-fields-section">
+                  <div class="slds-form-element__label-container">
+                    <div class="additional-fields-label-row">
+                      <label class="slds-form-element__label profile-field-label">Additional Sections</label>
+                    </div>
                   </div>
-                </div>
-              </div>
-              
-              <!-- Contact Section -->
-              <div class="section-item">
-                <div class="section-item-content">
-                  <lightning-icon 
-                    icon-name="utility:drag_and_drop" 
-                    size="x-small" 
-                    class="drag-icon">
-                  </lightning-icon>
-                  <span class="section-item-label contact-name-clickable" onclick={handleContactNameClick}>Contact</span>
-                </div>
-                <div class="section-dropdown-container">
-                  <button class="slds-button slds-button_icon slds-button_icon-border slds-button_icon-small section-dropdown-button" onclick={handleContactMenu}>
-                    <lightning-icon icon-name="utility:down" size="x-small" alternative-text="More actions"></lightning-icon>
-                    <span class="slds-assistive-text">More actions</span>
-                  </button>
-                  <div class="slds-dropdown slds-dropdown_right section-menu" if:true={showContactMenu}>
-                    <ul class="slds-dropdown__list" role="menu">
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactEdit}>
-                          <span class="slds-truncate">Edit</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactSetInvisible}>
-                          <span class="slds-truncate">Set As Invisible</span>
-                        </a>
-                      </li>
-                      <li class="slds-dropdown__item" role="presentation">
-                        <a href="#" role="menuitem" onclick={handleContactDelete}>
-                          <span class="slds-truncate">Delete</span>
-                        </a>
-                      </li>
-                    </ul>
+                  
+                  <!-- Section Pills -->
+                  <div class="additional-fields-container additional-fields-pills-section">
+                    <template for:each={additionalProfileFields} for:item="field">
+                      <div key={field.id} class="section-pill-container">
+                        <div class="section-pill" data-visible={field.isVisible}>
+                          <!-- First Row: Drag Handle, Section Name, and Dropdown Button -->
+                          <div class="section-header-row">
+                            <lightning-icon 
+                              icon-name="utility:drag_and_drop" 
+                              size="x-small" 
+                              class="section-drag-handle">
+                            </lightning-icon>
+                            
+                            <span class="section-name">{field.displayName}</span>
+                            
+                            <lightning-button-menu 
+                              alternative-text="Section options"
+                              icon-size="x-small"
+                              menu-alignment="right"
+                              variant="border-filled"
+                              onselect={handleSectionMenuSelect}
+                              data-field-id={field.id}
+                              class="section-dropdown-button">
+                              <lightning-menu-item 
+                                value="invisible" 
+                                label={field.visibilityMenuLabel}>
+                              </lightning-menu-item>
+                              <lightning-menu-item 
+                                value="delete" 
+                                label="Delete">
+                              </lightning-menu-item>
+                            </lightning-button-menu>
+                          </div>
+                          
+                          <!-- Second Row: Field Counter Input -->
+                          <lightning-input
+                            type="number"
+                            label="Number of Fields"
+                            value={field.fieldCount}
+                            min="1"
+                            max="5"
+                            step="1"
+                            onchange={handleFieldCountChange}
+                            onblur={handleFieldCountBlur}
+                            data-field-id={field.id}
+                            class="field-counter-input"
+                            message-when-range-overflow="The number should within 1 to 5"
+                            message-when-range-underflow="The number should within 1 to 5"
+                            message-when-bad-input="The number should within 1 to 5">
+                          </lightning-input>
+                        </div>
+                      </div>
+                    </template>
+                    
+                    <!-- Add Section Button -->
+                    <button class="slds-button slds-button_neutral add-field-button slds-m-top_x-small" type="button" onclick={handleAddProfileField} disabled={isAddFieldButtonDisabled}>
+                      <svg class="slds-button__icon slds-button__icon_left" aria-hidden="true" viewBox="0 0 520 520">
+                        <path d="M300 290h165c8 0 15-7 15-15v-30c0-8-7-15-15-15H300c-6 0-10-4-10-10V55c0-8-7-15-15-15h-30c-8 0-15 7-15 15v165c0 6-4 10-10 10H55c-8 0-15 7-15 15v30c0 8 7 15 15 15h165c6 0 10 4 10 10v165c0 8 7 15 15 15h30c8 0 15-7 15-15V300c0-6 4-10 10-10z"/>
+                      </svg>
+                      Add Section
+                    </button>
+                    
                   </div>
                 </div>
               </div>
@@ -568,14 +719,7 @@
                 </div>
               </template>
               
-              <!-- Add Section Button -->
-              <lightning-button
-                label="Add Section"
-                icon-name="utility:add"
-                variant="neutral"
-                class="add-section-button"
-                onclick={handleAddSectionClick}>
-              </lightning-button>
+              <!-- Add Section button removed for Prototype 3 -->
             </div>
           </lightning-accordion-section>
           
@@ -617,36 +761,11 @@
             </div>
           </lightning-accordion-section>
         </lightning-accordion>
-      </div>
-    </div>
+          </div> <!-- End properties-body -->
+        </template>
+      </div> <!-- End properties-panel -->
   </div>
 
-  <!-- Profile Modal -->
-  <main-profile-modal 
-    is-open={showProfileModal}
-    onmodalclose={handleProfileModalClose}
-    onsave={handleProfileSave}>
-  </main-profile-modal>
-
-  <!-- Contact Modal -->
-  <main-contact-modal 
-    is-open={showContactModal}
-    onmodalclose={handleContactModalClose}
-    onsave={handleContactSave}>
-  </main-contact-modal>
-
-  <!-- Add Section Modal (Step 1) -->
-  <main-add-section-modal 
-    is-open={showAddSectionModal}
-    onmodalclose={handleAddSectionModalClose}
-    onaddsection={handleAddSection}>
-  </main-add-section-modal>
-
-  <!-- Add Insight Modal (Step 2) -->
-  <main-add-insight-modal 
-    is-open={showAddInsightModal}
-    onmodalclose={handleAddInsightModalClose}
-    onback={handleAddInsightBack}
-    onsave={handleAddInsightSave}>
-  </main-add-insight-modal>
+  <!-- Note: All modal components removed for Prototype 3 -->
+  <!-- Prototype 3 will use inline editing instead of modals -->
 </template>

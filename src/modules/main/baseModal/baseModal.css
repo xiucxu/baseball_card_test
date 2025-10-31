@@ -1,0 +1,31 @@
+/* SLDS Standard Modal Styling */
+.slds-modal__container {
+    width: 60%;
+    min-width: 640px;
+    max-width: 1000px;
+    min-height: 620px; /* Reduced height for 2 icon options instead of 4 */
+}
+
+/* Modal content with increased height */
+.slds-modal__content {
+    min-height: 420px; /* Reduced content area height for smaller dropdowns */
+    max-height: 75vh; /* Reduced vertical space since dropdowns are smaller */
+    overflow-y: auto;
+    padding-bottom: 60px; /* Reduced padding since dropdown is shorter */
+}
+
+/* Ensure proper z-index layering */
+.slds-modal {
+    z-index: 9000;
+}
+
+.slds-backdrop {
+    z-index: 8999;
+}
+
+
+
+/* Focus management */
+.slds-modal:focus {
+    outline: none;
+}

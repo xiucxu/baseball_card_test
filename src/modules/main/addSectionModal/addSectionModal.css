@@ -1,0 +1,196 @@
+/* Figma Exact Content Container */
+.figma-exact-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Description text now uses standard SLDS classes */
+
+/* Sections Container */
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Exact 16px gap between rows from Figma */
+    width: 100%;
+    margin-top: 1rem; /* Add padding between description text and tiles */
+}
+
+/* Sections Row */
+.sections-row {
+    display: flex;
+    gap: 16px; /* Exact 16px gap between cards from Figma */
+    justify-content: center;
+    width: 100%;
+}
+
+/* Section Card - Exact Figma Specifications */
+.section-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #c9c9c9;
+    border-radius: 0.25rem; /* 4px */
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    width: 378px; /* Exact width from Figma */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Section Card Hover State */
+.section-card:hover {
+    border-color: #1b96ff;
+}
+
+/* Section Card Selected State */
+.section-card--selected {
+    border: 2px solid #1b96ff;
+    border-width: 2px;
+}
+
+/* Section Card Disabled State - No interactive states but visually normal */
+.section-card--disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+.section-card--disabled:hover {
+    border-color: #c9c9c9; /* Keep original border color on hover - no blue hover */
+}
+
+/* Hidden Radio Input */
+.section-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Section Content Container */
+.section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Exact 10px gap from Figma */
+    padding: 16px; /* Exact 16px padding from Figma */
+    flex: 1;
+    box-sizing: border-box;
+}
+
+/* Section Title - Exact Figma Typography */
+.section-title {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem; /* 16px */
+    font-weight: 400;
+    line-height: 1.5; /* 24px / 16px */
+    color: #181818;
+    margin: 0;
+    width: 100%;
+}
+
+/* Section Description - Exact Figma Typography */
+.section-description {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 400;
+    line-height: 1.5384615385; /* 20px / 13px */
+    color: #181818;
+    margin: 0;
+    width: 100%;
+}
+
+/* Section Checkmark - Only visible on selected */
+.section-checkmark {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38px; /* Exact 38px background from Figma */
+    height: 38px; /* Exact 38px background from Figma */
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+/* Checkmark Background Triangle */
+.section-checkmark::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 38px 38px 0;
+    border-color: transparent #1b96ff transparent transparent;
+    border-radius: 0 4px 0 0;
+}
+
+/* Checkmark Icon Container */
+.section-checkmark lightning-icon {
+    position: absolute;
+    top: 3px; /* Exact 3px from Figma */
+    right: 3px; /* Exact 3px from Figma */
+    width: 16px; /* Exact 16px from Figma */
+    height: 16px; /* Exact 16px from Figma */
+    --slds-c-icon-color-foreground: #ffffff !important;
+    --slds-c-icon-color-foreground-default: #ffffff !important;
+    color: #ffffff !important;
+    z-index: 2;
+}
+
+.section-card--selected .section-checkmark {
+    opacity: 1;
+}
+
+/* Ensure the SVG path inside the icon is white */
+.section-checkmark lightning-icon svg {
+    fill: #ffffff !important;
+}
+
+.section-checkmark lightning-icon svg path {
+    fill: #ffffff !important;
+}
+
+/* Modal Footer Button Layout */
+.modal-footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Responsive Design for Visual Picker */
+@media (max-width: 768px) {
+    .add-section-form .slds-visual-picker {
+        grid-template-columns: 1fr;
+        gap: var(--slds-g-spacing-2);
+    }
+    
+    .add-section-form .slds-visual-picker label {
+        height: 100px;
+    }
+    
+    .add-section-form .slds-visual-picker__figure {
+        padding: var(--slds-g-spacing-2);
+    }
+}
+
+/* Focus states - SLDS Standard */
+.add-section-form .slds-visual-picker input[type="radio"]:focus + label {
+    box-shadow: var(--slds-g-shadow-outset-focus);
+    outline: none;
+}
+
+/* Disabled state for Add Section button */
+.add-section-form lightning-button[disabled] {
+    --slds-c-button-color-background: var(--slds-g-color-neutral-base-80);
+    --slds-c-button-text-color: var(--slds-g-color-neutral-base-50);
+    cursor: not-allowed;
+}
+
+/* Icon sizing in visual picker */
+.add-section-form .slds-visual-picker__icon lightning-icon {
+    --slds-c-icon-color-foreground: currentColor;
+}

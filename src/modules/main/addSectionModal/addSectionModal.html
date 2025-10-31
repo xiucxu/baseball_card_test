@@ -1,0 +1,83 @@
+<template>
+  <main-base-modal 
+    is-open={isOpen} 
+    title="Add Section"
+    close-on-backdrop-click={allowBackdropClose}
+    onmodalclose={handleModalClose}>
+    
+    <!-- Modal Content -->
+    <div slot="content">
+      <div class="figma-exact-content">
+        <!-- Description Text -->
+        <div class="slds-text-body_regular slds-m-bottom_medium">
+          <p class="slds-text-color_default">
+            Select one pre-defined section to customize or define your own custom section from blank.
+          </p>
+        </div>
+
+        <!-- Section Grid - Exact Figma Layout -->
+        <div class="sections-container">
+          <!-- First Row -->
+          <div class="sections-row">
+            <!-- Profile Section (Disabled) -->
+            <div class="section-card section-card--disabled">
+              <input type="radio" id="section-profile" value="profile" name="section-options" class="section-input" disabled />
+              <div class="section-content">
+                <h3 class="section-title">Profile</h3>
+                <p class="section-description">Displays information about the individual or account from the unified profile object.</p>
+              </div>
+            </div>
+
+            <!-- Contact Section (Disabled) -->
+            <div class="section-card section-card--disabled">
+              <input type="radio" id="section-contact" value="contact" name="section-options" class="section-input" disabled />
+              <div class="section-content">
+                <h3 class="section-title">Contact</h3>
+                <p class="section-description">List contact point information from different sources and channels of selection.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Second Row -->
+          <div class="sections-row">
+            <!-- Insights Section (Selected) -->
+            <div class="section-card section-card--selected" onclick={handleSectionClick} data-value="insights">
+              <input type="radio" id="section-insights" value="insights" name="section-options" class="section-input" onchange={handleSectionChange} checked />
+              <div class="section-content">
+                <h3 class="section-title">Insights</h3>
+                <p class="section-description">Shows calculated insights metrics about the unified profile object with chart.</p>
+              </div>
+              <div class="section-checkmark">
+                <lightning-icon icon-name="utility:check" size="x-small"></lightning-icon>
+              </div>
+            </div>
+
+            <!-- Custom Section (Disabled) -->
+            <div class="section-card section-card--disabled">
+              <input type="radio" id="section-custom" value="custom" name="section-options" class="section-input" disabled />
+              <div class="section-content">
+                <h3 class="section-title">Custom</h3>
+                <p class="section-description">Choose any fields from the connected Data Cloud objects via the unified profile object.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal Footer -->
+    <div slot="footer" class="modal-footer-buttons">
+      <lightning-button 
+        variant="neutral" 
+        label="Cancel" 
+        onclick={handleCancel}>
+      </lightning-button>
+      <lightning-button 
+        variant="brand" 
+        label="Next" 
+        onclick={handleNext}
+        disabled={isAddButtonDisabled}>
+      </lightning-button>
+    </div>
+  </main-base-modal>
+</template>

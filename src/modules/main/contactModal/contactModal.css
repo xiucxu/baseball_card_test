@@ -1,0 +1,284 @@
+/* Contact Modal Form Styling */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    z-index: 1;
+    overflow: visible; /* Allow dropdowns to extend beyond form boundaries */
+}
+
+/* Description text styling */
+.contact-form .slds-text-body_regular {
+    font-size: 13px;
+    line-height: 20px;
+    color: var(--slds-g-color-neutral-base-10);
+}
+
+/* Section Label - SLDS Standard Styling */
+.contact-form .slds-form-element__label .slds-text-heading_small {
+    font-family: var(--slds-g-font-family-text);
+    font-size: var(--slds-g-font-size-3);
+    font-weight: var(--slds-g-font-weight-bold);
+    line-height: var(--slds-g-line-height-heading);
+    color: var(--slds-g-color-neutral-base-10);
+    margin: 0;
+}
+
+/* Checkbox group styling - SLDS Standard */
+.contact-form .slds-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slds-g-spacing-1);
+}
+
+.contact-form .slds-checkbox {
+    margin-bottom: 0;
+    position: relative;
+}
+
+.contact-form .slds-checkbox__label {
+    display: flex;
+    align-items: flex-start;
+    font-family: var(--slds-g-font-family-text);
+    font-size: var(--slds-g-font-size-3);
+    font-weight: var(--slds-g-font-weight-regular);
+    line-height: var(--slds-g-line-height-text);
+    color: var(--slds-g-color-neutral-base-10);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-form .slds-checkbox_faux {
+    margin-right: var(--slds-g-spacing-2);
+    margin-top: 2px; /* Align with first line of text */
+}
+
+.contact-form .slds-checkbox__label-text {
+    font-family: var(--slds-g-font-family-text);
+    font-size: var(--slds-g-font-size-3);
+    font-weight: var(--slds-g-font-weight-regular);
+    line-height: var(--slds-g-line-height-text);
+    color: var(--slds-g-color-neutral-base-10);
+    margin: 0;
+    padding: 0;
+}
+
+/* Additional fields section - SLDS Standard Styling */
+.contact-form .slds-form-element__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-form .slds-form-element__label .slds-text-heading_small {
+    font-family: var(--slds-g-font-family-text);
+    font-size: var(--slds-g-font-size-3);
+    font-weight: var(--slds-g-font-weight-bold);
+    line-height: var(--slds-g-line-height-heading);
+    color: var(--slds-g-color-neutral-base-10);
+    margin: 0;
+}
+
+/* Add Field button styling */
+.contact-form lightning-button[label="Add Field"] {
+    --slds-c-button-color-background: transparent;
+    --slds-c-button-color-border: var(--slds-g-color-neutral-base-50);
+    --slds-c-button-text-color: var(--slds-g-color-brand-base-10);
+}
+
+/* Additional fields list styling */
+.contact-form .slds-grid {
+    align-items: end;
+}
+
+.contact-form lightning-button-icon[icon-name="utility:delete"] {
+    --slds-c-button-color-background: transparent;
+    --slds-c-button-text-color: var(--slds-g-color-neutral-base-50);
+}
+
+.contact-form lightning-button-icon[icon-name="utility:delete"]:hover {
+    --slds-c-button-text-color: var(--slds-g-color-error);
+}
+
+/* Figma Field Configuration Styling */
+.contact-form .figma-field-input {
+  height: 52px;
+}
+
+/* SLDS Button Group Styling - Connected Buttons */
+.contact-form lightning-button-group {
+  display: inline-flex;
+}
+
+.contact-form lightning-button-group lightning-button-icon {
+  --slds-c-button-color-background: #ffffff;
+  --slds-c-button-color-border: #c9c9c9;
+  --slds-c-button-text-color: #747474;
+  margin: 0;
+  border-radius: 0;
+}
+
+/* First button in group - left border radius */
+.contact-form lightning-button-group lightning-button-icon:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+/* Last button in group - right border radius */
+.contact-form lightning-button-group lightning-button-icon:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Remove duplicate borders between buttons */
+.contact-form lightning-button-group lightning-button-icon:not(:last-child) {
+  margin-right: -1px;
+}
+
+.contact-form lightning-button-group lightning-button-icon:hover {
+  --slds-c-button-color-background: #f3f3f3;
+  z-index: 1;
+}
+
+/* Order number and button group horizontal layout */
+.contact-form .slds-grid.slds-grid_align-center {
+  align-items: center;
+}
+
+.contact-form .slds-gutters_direct-small > .slds-col {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.contact-form .slds-gutters_direct-small > .slds-col:first-child {
+  padding-left: 0;
+}
+
+.contact-form .slds-gutters_direct-small > .slds-col:last-child {
+  padding-right: 0;
+}
+
+/* Delete Button Styling */
+.contact-form .figma-delete-btn {
+  --slds-c-button-color-background: #ffffff;
+  --slds-c-button-color-border: #747474;
+  --slds-c-button-text-color: #747474;
+  --slds-c-button-radius-border: 4px;
+}
+
+.contact-form .figma-delete-btn:hover {
+  --slds-c-button-text-color: #ba0517;
+  --slds-c-button-color-border: #ba0517;
+}
+
+/* Field Input Styling to Match Figma - Bottom Aligned */
+.contact-form .figma-field-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.contact-form .figma-field-input lightning-base-combobox,
+.contact-form .figma-field-input .slds-form-element__control {
+  height: 32px;
+  margin-top: 0;
+}
+
+.contact-form .figma-field-input .slds-combobox__form-element,
+.contact-form .figma-field-input .slds-input {
+  height: 32px;
+  border: 1px solid #747474;
+  border-radius: 4px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+  line-height: 20px;
+  color: #181818;
+  padding: 6px 12px;
+}
+
+.contact-form .figma-field-input .slds-combobox__input::placeholder,
+.contact-form .figma-field-input .slds-input::placeholder {
+  color: #747474;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 13px;
+}
+
+/* Field Labels to Match Figma Typography */
+.contact-form .figma-field-input .slds-form-element__label {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: #444444;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+
+.contact-form .figma-field-input .slds-form-element__label .slds-required {
+  color: #ba0517;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+/* Field Configuration Row - Exact Figma Layout */
+.contact-form .field-config-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+/* Field Order Number - 32px height, centered */
+.contact-form .field-order-number {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* Button Group Container */
+.contact-form .field-button-group {
+  flex-shrink: 0;
+}
+
+/* Field Input Containers - Grow to fill space, 52px height */
+.contact-form .field-input-container {
+  flex: 1;
+  min-width: 0; /* Allow shrinking */
+  height: 52px;
+  position: relative;
+}
+
+/* Delete Button Container - Fixed 32px size */
+.contact-form .field-delete-button {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.contact-form .slds-grid.slds-gutters_small > .slds-col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Focus states - SLDS Standard */
+.contact-form .slds-checkbox input:focus + .slds-checkbox__label .slds-checkbox_faux {
+  box-shadow: var(--slds-g-shadow-outset-focus);
+  outline: none;
+}
+
+.contact-form .slds-checkbox input:focus + .slds-checkbox__label {
+  color: var(--slds-g-color-neutral-base-10);
+}
+
+.contact-form lightning-input:focus-within,
+.contact-form lightning-button:focus {
+  box-shadow: var(--slds-g-shadow-outset-focus);
+  outline: none;
+}
